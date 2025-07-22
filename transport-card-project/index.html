@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>교통카드 추천기</title>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Gowun Dodum', sans-serif;
+      background: #fffef8;
+      color: #333;
+      padding: 40px 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #4caf50;
+      margin-bottom: 10px;
+    }
+
+    .description {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    label {
+      font-size: 1.1em;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 2px solid #c8e6c9;
+      border-radius: 10px;
+      font-size: 1em;
+    }
+
+    button {
+      background-color: #81c784;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      font-size: 1.1em;
+      display: block;
+      margin: 20px auto;
+    }
+
+    button:hover {
+      background-color: #66bb6a;
+    }
+
+    .input-area {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    #result {
+      display: none;
+      margin-top: 25px;
+    }
+
+    .card-highlight {
+      font-weight: bold;
+      color: #2e7d32;
+      font-size: 1.3em;
+    }
+  </style>
+</head>
+<body>
+  <h1>
+    <span style="font-size: 0.5em; font-weight: normal;">서울권 대학생들을 위한</span><br>
+    🚌 교통카드 추천기 💳
+  </h1>
+
+  <p class="description">💡 기후동행카드와 K-pass를 고민하는 당신을 위해! 💡</p>
+
+  <div class="input-area">
+    <label for="age">만 나이를 적어주세요.</label>
+    <input type="number" id="age" placeholder="예: 24">
+
+    <label for="usage">일주일에 대중교통을 몇 회정도 이용하시나요?</label>
+    <input type="number" id="usage" placeholder="예: 10">
+
+    <label for="lowIncome">저소득층 여부를 체크해주세요.</label>
+    <select id="lowIncome">
+      <option value="no">아니오</option>
+      <option value="yes">예</option>
+    </select>
+
+    <label for="mode">교통 종류를 선택해주세요. 해당 교통의 가격으로 계산됩니다!</label>
+    <select id="mode">
+      <option value="subway">지하철</option>
+      <option value="bus">버스</option>
+      <option value="town">마을버스</option>
+      <option value="custom">기타(직접 입력)</option>
+    </select>
+
+    <div id="customFareContainer" style="display:none; width: 100%;">
+      <label for="customFare">직접 입력한 1회 요금 (원)</label>
+      <input type="number" id="customFare" placeholder="예: 1600">
+    </div>
+
+    <button id="recommendBtn">✨ 추천받기!</button>
+  </div>
+
+  <div id="result"></div>
+
+  <script src="recommend.js"></script>
+  <script src="script.js"></script>
+  <script>
+    const modeSelect = document.getElementById('mode');
+    const customFareContainer = document.getElementById('customFareContainer');
+
+    modeSelect.addEventListener('change', function () {
+      customFareContainer.style.display = this.value === 'custom' ? 'block' : 'none';
+    });
+  </script>
+</body>
+</html>
